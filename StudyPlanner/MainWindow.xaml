@@ -1,0 +1,94 @@
+﻿<Window x:Class="StudyPlanner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudyPlanner"
+        mc:Ignorable="d"
+        Title="Study Planner" Height="520" Width="950">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="160"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Header="Активни задачи" Margin="0,0,0,10">
+            <DataGrid x:Name="TasksGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Заглавие" Binding="{Binding Title}" Width="*" />
+                    <DataGridTextColumn Header="Предмет" Binding="{Binding Subject}" Width="*" />
+                    <DataGridTextColumn Header="Краен срок" Binding="{Binding Deadline}" Width="*" />
+                    <DataGridCheckBoxColumn Header="Изпълнена" Binding="{Binding IsCompleted}" Width="100" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Header="Изпълнени задачи" Margin="0,0,0,10">
+            <DataGrid x:Name="CompletedTasksGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Заглавие" Binding="{Binding Title}" Width="*" />
+                    <DataGridTextColumn Header="Предмет" Binding="{Binding Subject}" Width="*" />
+                    <DataGridTextColumn Header="Краен срок" Binding="{Binding Deadline}" Width="*" />
+                    <DataGridCheckBoxColumn Header="Изпълнена" Binding="{Binding IsCompleted}" Width="100" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <WrapPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBox x:Name="TitleTextBox" Width="140" Height="28" Margin="0,0,10,10"/>
+            <TextBox x:Name="SubjectTextBox" Width="140" Height="28" Margin="0,0,10,10"/>
+            <DatePicker x:Name="DeadlinePicker" Width="140" Height="28" Margin="0,0,10,10"/>
+
+            <Button Content="Добави задача"
+                Width="120"
+                Height="30"
+                Margin="0,0,10,10"
+                Click="AddTask_Click"/>
+
+            <Button Content="Маркирай изпълнена"
+                Width="150"
+                Height="30"
+                Margin="0,0,10,10"
+                Click="CompleteTask_Click"/>
+
+            <Button Content="Изтрий задача"
+                Width="120"
+                Height="30"
+                Margin="0,0,10,10"
+                Click="DeleteTask_Click"/>
+            <Button Content="Експортирай задача" 
+                Width="140" 
+                Height="30" 
+                Margin="0,0,10,10" 
+                Click="ExportTask_Click"/>
+
+            <ComboBox x:Name="ModeComboBox"
+                  Width="140"
+                  Height="28"
+                  Margin="0,0,10,10"
+                  SelectionChanged="ModeComboBox_SelectionChanged">
+                <ComboBoxItem Content="Event Mode" IsSelected="True"/>
+                <ComboBoxItem Content="Delegate Mode"/>
+            </ComboBox>
+
+            <Button Content="Счупи Delegate"
+                Width="130"
+                Height="30"
+                Margin="0,0,10,10"
+                Click="BreakDelegate_Click"/>
+        </WrapPanel>
+
+        <GroupBox Grid.Row="3" Header="Известия">
+            <ListBox x:Name="NotificationsListBox"/>
+        </GroupBox>
+    </Grid>
+</Window>
